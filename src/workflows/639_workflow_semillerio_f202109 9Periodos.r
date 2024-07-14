@@ -263,15 +263,15 @@ TS_strategy_base9 <- function( pinputexps )
   param_local$meta$script <- "/src/wf-etapas/z571_TS_training_strategy.r"
 
 
-    param_local$future <- c(202109)
-  param_local$final_train <- c(202007, 202006, 202105, 202104,
-                               202103, 202102, 202101, 202012, 202011)
+  param_local$future <- c(202109)
+  param_local$final_train <- c(202107, 202106, 202105, 202104,
+                               202103, 202102, 202101, 202012, 202011, 202010,202009,202008)
   
   
   param_local$train$training <- c(202105, 202104, 202103,
-                                  202102, 202101, 202012, 202011, 202010, 202009)
-  param_local$train$validation <- c(202106)
-  param_local$train$testing <- c(202107)
+                                  202102, 202101, 202012, 202011, 202010, 202009,202008,202007,202005)
+  param_local$train$validation <- c(202104)
+  param_local$train$testing <- c(202105, 202106, 202107)
   
   # Atencion  0.2  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling
@@ -377,7 +377,7 @@ ZZ_final_semillerio_base9 <- function( pinputexps )
   # El parametro fundamental de semillerio
   # Es la cantidad de LightGBM's que ensamblo
   # cuanto mas grande mejor, pero asintotico
-  param_local$semillerio <- 100
+  param_local$semillerio <- 30
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -396,7 +396,7 @@ wf_sept_semillerio <- function( pnombrewf )
   DT_incorporar_dataset_competencia2024()
   CA_catastrophe_base( metodo="MachineLearning")
   FEintra_base()
-  DR_drifting_base(metodo="uva")
+  DR_drifting_base(metodo="rank_cero_fijo")
   FEhist_base()
   #FErf_attributes_base()
   CN_canaritos_asesinos_base(ratio=1.5, desvio=0.75)
@@ -414,4 +414,3 @@ wf_sept_semillerio <- function( pnombrewf )
 
 # llamo al workflow con future = 202109
 wf_sept_semillerio()
-
